@@ -46,9 +46,6 @@ end
 function OnTick(World, TimeDelta)
   Time_counter = Time_counter + TimeDelta
   if Time_counter / 5000 > tonumber(Time) then
-    local callback = function(Player)
-      Player:SendMessage(Message_Prefix .. " " .. Messages[random])
-    end
     random = math.random(1, Message_counter - 1)
     if NoRepeat == "true" then
       while Message_last == Messages[random] do
@@ -56,7 +53,7 @@ function OnTick(World, TimeDelta)
       end
       Message_last = Messages[random]
     end
-    cRoot:Get():ForEachPlayer(callback)
+		cRoot:Get():BroadcastChat(Message_Prefix .. " " .. Messages[random])
     Time_counter = 0
   end
 end
